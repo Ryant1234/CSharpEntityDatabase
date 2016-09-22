@@ -18,7 +18,6 @@ namespace CSharpEntityDatabase
         public Room()
         {
             this.Bookings = new HashSet<Booking>();
-            this.Bookings1 = new HashSet<Booking>();
         }
     
         public int RoomID { get; set; }
@@ -27,7 +26,5 @@ namespace CSharpEntityDatabase
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings1 { get; set; }
     }
 }

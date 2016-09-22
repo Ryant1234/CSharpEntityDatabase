@@ -18,20 +18,15 @@ namespace CSharpEntityDatabase
         public Invoice()
         {
             this.Bookings = new HashSet<Booking>();
-            this.Bookings1 = new HashSet<Booking>();
         }
     
         public int InvoiceId { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public Nullable<System.DateTime> DatePaid { get; set; }
         public int GuestIDFK { get; set; }
-        public int BarTab { get; set; }
-        public int MiniBar { get; set; }
-        public int RoomCharge { get; set; }
-        public int BookingIDFK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings1 { get; set; }
         public virtual Guest Guest { get; set; }
     }
 }

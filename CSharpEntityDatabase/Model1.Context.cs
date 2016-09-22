@@ -15,10 +15,10 @@ namespace CSharpEntityDatabase
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class HotelDBEntities2 : DbContext
+    public partial class HotelDBEntities : DbContext
     {
-        public HotelDBEntities2()
-            : base("name=HotelDBEntities2")
+        public HotelDBEntities()
+            : base("name=HotelDBEntities")
         {
         }
     

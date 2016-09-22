@@ -84,9 +84,15 @@
     <Compile Include="Guest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Hotel.BL\BookingRepository.cs" />
+    <Compile Include="Hotel.BL\DataManagement.cs" />
+    <Compile Include="Hotel.BL\GuestRepository.cs" />
+    <Compile Include="Hotel.BL\InvoiceRepository.cs" />
+    <Compile Include="Hotel.BL\RoomRepository.cs" />
     <Compile Include="Invoice.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,13 +173,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HotelDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="HotelDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>HotelDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

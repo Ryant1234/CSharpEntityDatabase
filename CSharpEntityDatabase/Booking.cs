@@ -22,11 +22,11 @@ namespace CSharpEntityDatabase
         public Nullable<System.DateTime> CheckinTime { get; set; }
         public Nullable<System.DateTime> CheckoutTime { get; set; }
         public Nullable<int> InvoiceIDFK { get; set; }
+        public Nullable<int> MiniBar { get; set; }
+        public Nullable<int> Room_Charge { get; set; }
     
-        public virtual Guest Guest { get; set; }
         public virtual Invoice Invoice { get; set; }
-        public virtual Invoice Invoice1 { get; set; }
         public virtual Room Room { get; set; }
-        public virtual Room Room1 { get; set; }
+        public virtual Guest Guest { get; set; }
     }
 }
