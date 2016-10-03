@@ -21,8 +21,9 @@ namespace CSharpEntityDatabase
         }
     
         public int RoomID { get; set; }
-        public int NumSingleBeds { get; set; }
-        public int NumDoubleBeds { get; set; }
+        public string RoomType { get; set; }
+        public int ExtraSingleBedCount { get; set; }
+        public int ExtraDoubleBedCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }

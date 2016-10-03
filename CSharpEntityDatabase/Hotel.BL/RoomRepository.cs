@@ -9,13 +9,13 @@ namespace CSharpEntityDatabase.Hotel.BL
 {
    public class RoomRepository
     {
-       public void InsertRooms()
+       public void InsertRooms(string roomType)
        {
             using (var context = new HotelDBEntities())
             {
 
                 var newRoom = new Room();
-                newRoom.NumSingleBeds = 2;
+                newRoom.RoomType = roomType;
                 context.Rooms.Add(newRoom);
                   context.SaveChanges();
             }
@@ -25,23 +25,117 @@ namespace CSharpEntityDatabase.Hotel.BL
 
        public IEnumerable GetRooms()
        {
+           using (var context = new HotelDBEntities())
+           {
+               var alldata = from r in context.Rooms
+           
+                   select new
+
+                   {
+                       r.RoomID,
+                       r.RoomType
+                       
+
+
+                   };
+
+
+               return alldata.ToList();
+           }
+
+       }
+
+
+
+        public void AddSingleBed(int roomId, int singleBedCount)
+
+        {
             using (var context = new HotelDBEntities())
             {
-                var alldata = from r in context.Rooms
-                                  //where g.GuestID.Equals(1)
-                              select new
+                var query = from r in context.Rooms
+                            where r.RoomID == roomId
+                            select r;
 
-                              {
-                                  r.RoomID,
-                                  r.NumSingleBeds,
-            
-
-                              };
+                var room = query.First();
 
 
-                return alldata.ToList();
+
+                room.ExtraSingleBedCount = singleBedCount;
+
+                context.SaveChanges();
             }
+        }
+
+        public void AddDoubleBed(int roomId, int doubleBedCount)
+
+        {
+            using (var context = new HotelDBEntities())
+            {
+                var query = from r in context.Rooms
+                            where r.RoomID == roomId
+                            select r;
+
+                var room = query.First();
+
+
+
+                room.ExtraDoubleBedCount = doubleBedCount;
+
+                context.SaveChanges();
+            }
+        }
+
+
+
+
+
+
+        public void DeleteRoom(int roomId)
+        {
+
+            using (var context = new HotelDBEntities())
+            {
+
+                var roomToDelete = new Room
+                { RoomID = roomId };
+
+
+
+
+
+                context.Rooms.Attach(roomToDelete);
+                context.Rooms.Remove(roomToDelete);
+                context.SaveChanges();
+
+
+            }
+        }
+
+
+
+        public void EditRoom(int roomId, string roomType)
+
+        {
+            using (var context = new HotelDBEntities())
+            {
+                var query = from r in context.Rooms
+                            where r.RoomID == roomId
+                            select r;
+
+                var room = query.First();
+
+
+                room.RoomType = roomType;
+
+                context.SaveChanges();
+            }
+        }
+
+
+
+
+
     }
 
     }
-}
+

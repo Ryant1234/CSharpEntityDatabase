@@ -14,19 +14,13 @@ namespace CSharpEntityDatabase
     
     public partial class Invoice
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Invoice()
-        {
-            this.Bookings = new HashSet<Booking>();
-        }
-    
         public int InvoiceId { get; set; }
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DatePaid { get; set; }
         public int GuestIDFK { get; set; }
+        public Nullable<int> BookingIDFK { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual Guest Guest { get; set; }
+        public virtual Booking Booking { get; set; }
     }
 }

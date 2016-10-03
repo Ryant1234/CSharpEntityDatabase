@@ -20,12 +20,14 @@ namespace CSharpEntityDatabase.Hotel.BL
                     select new
 
                     {
+                        b.BookingID,
                         b.Guest.FirstName,
                         b.BookingFrom,
                         b.BookingTo,
                         //     b.Invoice.InvoiceId,
                         b.GuestIDFK,
                         b.RoomIDFK
+                    
 
 
 
@@ -34,7 +36,7 @@ namespace CSharpEntityDatabase.Hotel.BL
 
                 return alldata.ToList();
 
-
+           
             }
 
         }
@@ -47,16 +49,17 @@ namespace CSharpEntityDatabase.Hotel.BL
             {
 
              
-
+         
                 var newBooking = new Booking();
                 newBooking.RoomIDFK = roomId;
                 newBooking.BookingFrom = bookingFrom;
                 newBooking.BookingTo = bookingTo;
                 newBooking.GuestIDFK = guestId;
-                
+             
 
-
+              //  context.Invoices.Add(newInvoice);
                 context.Bookings.Add(newBooking);
+                  
               
                 context.SaveChanges();
             }
@@ -93,6 +96,7 @@ namespace CSharpEntityDatabase.Hotel.BL
                 var availableRooms = context.Rooms.Where(r => !bookedRooms.Contains(r.RoomID)).Select(r => new
                 {
                     r.RoomID,
+                    r.RoomType
                 
                 }).ToList();
 

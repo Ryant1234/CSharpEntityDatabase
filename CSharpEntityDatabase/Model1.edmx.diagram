@@ -5,15 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d0ca8f19cc414061b23ba6807ec8a939" Name="Diagram1">
-        <EntityTypeShape EntityType="HotelDBModel.Booking" Width="1.5" PointX="6.375" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDBModel.Booking" Width="1.5" PointX="9.375" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDBModel.Guest" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelDBModel.Invoice" Width="1.5" PointX="3.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDBModel.Invoice" Width="1.5" PointX="4.875" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDBModel.Room" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <AssociationConnector Association="HotelDBModel.FK_Booking_Invoice2" ManuallyRouted="false" />
         <AssociationConnector Association="HotelDBModel.FK_Booking_Room2" ManuallyRouted="false" />
         <EntityTypeShape EntityType="HotelDBModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
         <AssociationConnector Association="HotelDBModel.FK_Booking_Guest" />
         <AssociationConnector Association="HotelDBModel.FK_Invoice_Guest" />
+        <AssociationConnector Association="HotelDBModel.FK_Booking_Guest1" />
+        <AssociationConnector Association="HotelDBModel.FK_Invoice_Booking" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
