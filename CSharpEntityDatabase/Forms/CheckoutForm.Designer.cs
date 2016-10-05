@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.dgvGuests = new System.Windows.Forms.DataGridView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkboxHasPaid = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.txtMiniBarCharge = new System.Windows.Forms.TextBox();
             this.txtRoomCharge = new System.Windows.Forms.TextBox();
@@ -50,15 +50,16 @@
             this.dgvGuests.Size = new System.Drawing.Size(373, 150);
             this.dgvGuests.TabIndex = 0;
             // 
-            // checkBox1
+            // checkboxHasPaid
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(557, 131);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(94, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Customer Paid";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkboxHasPaid.AutoSize = true;
+            this.checkboxHasPaid.Location = new System.Drawing.Point(557, 131);
+            this.checkboxHasPaid.Name = "checkboxHasPaid";
+            this.checkboxHasPaid.Size = new System.Drawing.Size(94, 17);
+            this.checkboxHasPaid.TabIndex = 1;
+            this.checkboxHasPaid.Text = "Customer Paid";
+            this.checkboxHasPaid.UseVisualStyleBackColor = true;
+            this.checkboxHasPaid.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -152,7 +153,7 @@
             this.Controls.Add(this.txtRoomCharge);
             this.Controls.Add(this.txtMiniBarCharge);
             this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkboxHasPaid);
             this.Controls.Add(this.dgvGuests);
             this.Name = "CheckoutForm";
             this.Text = "CheckoutForm";
@@ -166,7 +167,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvGuests;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkboxHasPaid;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox txtMiniBarCharge;
         private System.Windows.Forms.TextBox txtRoomCharge;

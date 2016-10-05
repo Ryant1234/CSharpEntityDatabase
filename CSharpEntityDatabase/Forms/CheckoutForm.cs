@@ -20,22 +20,45 @@ namespace CSharpEntityDatabase.Forms
             // This form is for checking out a Guest, so we need to load the DGV with Bookings that haven't got a checkout Date 
             dgvGuests.DataSource = bookingRepository.GetBookingsWithNoCheckoutDate();
         }
-   
+
+        private bool hasPaid;
     
                
         private void btnCheckoutForm_Click(object sender, EventArgs e)
         {
-            var bookingId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
 
-            int roomCharge = int.Parse(txtRoomCharge.Text);
-            int minibarCharge = int.Parse(txtMiniBarCharge.Text);
-            int resturantBill = int.Parse(txtResturantBill.Text);
-            int totalBill = roomCharge + minibarCharge;
-            int guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[1].ToString());
-            var bookingRepository = new BookingRepository();
-            bookingRepository.CheckOutGuest(bookingId, minibarCharge, resturantBill);
-            var invoiceRepository = new InvoiceRepository();
-            invoiceRepository.NewInvoice(guestId, bookingId, totalBill);
+            if (checkboxHasPaid.Checked)
+
+            {
+                var bookingId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
+
+                int roomCharge = int.Parse(txtRoomCharge.Text);
+                int minibarCharge = int.Parse(txtMiniBarCharge.Text);
+                int resturantBill = int.Parse(txtResturantBill.Text);
+                int totalBill = roomCharge + minibarCharge;
+                bool hasPaid = true;
+                int guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[1].ToString());
+                var bookingRepository = new BookingRepository();
+                bookingRepository.CheckOutGuest(bookingId, minibarCharge, resturantBill);
+                var invoiceRepository = new InvoiceRepository();
+                invoiceRepository.NewInvoice(guestId, bookingId, totalBill, hasPaid);
+            }
+
+            else
+            {
+                var bookingId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
+
+                int roomCharge = int.Parse(txtRoomCharge.Text);
+                int minibarCharge = int.Parse(txtMiniBarCharge.Text);
+                int resturantBill = int.Parse(txtResturantBill.Text);
+                int totalBill = roomCharge + minibarCharge;
+                bool hasPaid = false;
+                int guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[1].ToString());
+                var bookingRepository = new BookingRepository();
+                bookingRepository.CheckOutGuest(bookingId, minibarCharge, resturantBill);
+                var invoiceRepository = new InvoiceRepository();
+                invoiceRepository.NewInvoice(guestId, bookingId, totalBill, hasPaid);
+            }
         }
 
         private void CheckoutForm_Load(object sender, EventArgs e)
@@ -68,6 +91,11 @@ namespace CSharpEntityDatabase.Forms
             {
                 e.Handled = true;
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

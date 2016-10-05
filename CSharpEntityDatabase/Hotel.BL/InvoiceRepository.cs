@@ -15,10 +15,12 @@ namespace CSharpEntityDatabase.Hotel.BL
         /// </summary>
         /// <param name="guestId"></param>
         /// <param name="bookingId"></param>
-        public void NewInvoice(int guestId, int bookingId, int totalBill)
+        public void NewInvoice(int guestId, int bookingId, int totalBill, bool hasPaid)
 
         {
-            
+            // If customer has paid
+            if (hasPaid == true)
+
             using (var context = new HotelDBEntities())
             {
 
@@ -27,12 +29,28 @@ namespace CSharpEntityDatabase.Hotel.BL
                 var newInvoice = new Invoice();
                 newInvoice.GuestIDFK = guestId;
                 newInvoice.DateCreated = DateTime.Now;
+                newInvoice.DatePaid = DateTime.Now;
+                newInvoice.BookingIDFK = bookingId;
+                newInvoice.InvoiceTotal = totalBill;
+                context.Invoices.Add(newInvoice);
+                context.SaveChanges();
+            }
+            // Otherwise
+            else
+
+                using (var context = new HotelDBEntities())
+                {
+                var newInvoice = new Invoice();
+                newInvoice.GuestIDFK = guestId;
+                newInvoice.DateCreated = DateTime.Now;
+                
                 newInvoice.BookingIDFK = bookingId;
                 newInvoice.InvoiceTotal = totalBill;
                 context.Invoices.Add(newInvoice);
                 context.SaveChanges();
             }
         }
+        
 
         /// <summary>
         /// Gets all the Invoices in the System
@@ -49,6 +67,9 @@ namespace CSharpEntityDatabase.Hotel.BL
                     {
                         i.InvoiceId,
                         i.GuestIDFK,
+                        i.Guest.FirstName,  
+                        i.DatePaid,
+                          
                         i.BookingIDFK,
                         i.InvoiceTotal
 

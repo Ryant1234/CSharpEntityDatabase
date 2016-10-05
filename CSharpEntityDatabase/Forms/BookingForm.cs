@@ -66,6 +66,7 @@ namespace CSharpEntityDatabase
                 
                 MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType);
                 AddSingleBed = false;
+                this.Close();
             }
 
             // If the User wants a Bunk Bed added to their Room
@@ -84,6 +85,7 @@ namespace CSharpEntityDatabase
 
                 MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType);
                 AddBunkBed = false;
+                this.Close();
             }
 
             else
@@ -101,6 +103,7 @@ namespace CSharpEntityDatabase
                 bookingRepository.NewBooking(guestId, roomId, bookingFrom, bookingTo, addedBedType, RoomPriceTotal);
 
                 MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo);
+                this.Close();
             }
         }
 
@@ -198,13 +201,7 @@ namespace CSharpEntityDatabase
         private void btnInvoice_Click(object sender, EventArgs e)
         {
 
-            // I want it so when you make a booking it selects the ID of the last booking made in the system and applys
-            // it to a new bookingIDFK in invoice
-            var bookingId = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
-var invoicerepository = new InvoiceRepository();
 
-            invoicerepository.NewInvoice(guestId, bookingId, RoomPriceTotal);
         
         }
 
