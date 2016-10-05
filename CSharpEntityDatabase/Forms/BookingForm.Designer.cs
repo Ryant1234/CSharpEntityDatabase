@@ -107,6 +107,7 @@
             this.dgvGuests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGuests.Size = new System.Drawing.Size(368, 192);
             this.dgvGuests.TabIndex = 59;
+            this.dgvGuests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGuests_CellClick);
             this.dgvGuests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNewBooking_CellContentClick);
             // 
             // label1
@@ -191,6 +192,7 @@
             this.cbExtraBeds.Size = new System.Drawing.Size(121, 21);
             this.cbExtraBeds.TabIndex = 76;
             this.cbExtraBeds.SelectedIndexChanged += new System.EventHandler(this.cbExtraBeds_SelectedIndexChanged);
+            this.cbExtraBeds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbExtraBeds_MouseClick);
             // 
             // label3
             // 

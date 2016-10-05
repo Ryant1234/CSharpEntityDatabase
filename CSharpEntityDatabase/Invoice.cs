@@ -19,6 +19,7 @@ namespace CSharpEntityDatabase
         public Nullable<System.DateTime> DatePaid { get; set; }
         public int GuestIDFK { get; set; }
         public Nullable<int> BookingIDFK { get; set; }
+        public int InvoiceTotal { get; set; }
     
         public virtual Guest Guest { get; set; }
         public virtual Booking Booking { get; set; }

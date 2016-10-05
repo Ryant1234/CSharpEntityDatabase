@@ -87,6 +87,12 @@
     <Compile Include="Forms\Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GuestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GuestForm.Designer.cs">
+      <DependentUpon>GuestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Guest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GuestForm.resx">
+      <DependentUpon>GuestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

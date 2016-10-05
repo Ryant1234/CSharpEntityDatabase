@@ -16,8 +16,11 @@
           <Property Name="CheckinTime" Type="datetime" />
           <Property Name="CheckoutTime" Type="datetime" />
           <Property Name="MiniBar" Type="int" />
-          <Property Name="RoomCharge" Type="int" />
+          <Property Name="RoomPrice" Type="int" />
           <Property Name="GuestIDFK" Type="int" Nullable="false" />
+          <Property Name="ResturantBill" Type="int" Nullable="false" />
+          <Property Name="AddSingleBed" Type="bit" />
+          <Property Name="AddBunkBed" Type="bit" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
@@ -41,6 +44,7 @@
           <Property Name="DatePaid" Type="datetime" />
           <Property Name="GuestIDFK" Type="int" Nullable="false" />
           <Property Name="BookingIDFK" Type="int" />
+          <Property Name="InvoiceTotal" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -180,9 +184,12 @@
           <NavigationProperty Name="Room" Relationship="Self.FK_Booking_Room2" FromRole="Booking" ToRole="Room" />
           <NavigationProperty Name="Guest" Relationship="HotelDBModel.FK_Booking_Guest" FromRole="Booking" ToRole="Guest" />
           <Property Name="MiniBar" Type="Int32" />
-          <Property Name="RoomCharge" Type="Int32" />
           <Property Name="GuestIDFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Invoice" Relationship="HotelDBModel.FK_Invoice_Booking" FromRole="Booking" ToRole="Invoice" />
+          <Property Name="RoomPrice" Type="Int32" />
+          <Property Name="ResturantBill" Type="Int32" Nullable="false" />
+          <Property Name="AddSingleBed" Type="Boolean" />
+          <Property Name="AddBunkBed" Type="Boolean" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
@@ -210,6 +217,7 @@
           <NavigationProperty Name="Guest" Relationship="HotelDBModel.FK_Invoice_Guest" FromRole="Invoice" ToRole="Guest" />
           <Property Name="BookingIDFK" Type="Int32" />
           <NavigationProperty Name="Booking" Relationship="HotelDBModel.FK_Invoice_Booking" FromRole="Invoice" ToRole="Booking" />
+          <Property Name="InvoiceTotal" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -368,8 +376,11 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="HotelDBModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="AddBunkBed" ColumnName="AddBunkBed" />
+                <ScalarProperty Name="AddSingleBed" ColumnName="AddSingleBed" />
+                <ScalarProperty Name="ResturantBill" ColumnName="ResturantBill" />
+                <ScalarProperty Name="RoomPrice" ColumnName="RoomPrice" />
                 <ScalarProperty Name="GuestIDFK" ColumnName="GuestIDFK" />
-                <ScalarProperty Name="RoomCharge" ColumnName="RoomCharge" />
                 <ScalarProperty Name="MiniBar" ColumnName="MiniBar" />
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
                 <ScalarProperty Name="RoomIDFK" ColumnName="RoomIDFK" />
@@ -397,6 +408,7 @@
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="HotelDBModel.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="InvoiceTotal" ColumnName="InvoiceTotal" />
                 <ScalarProperty Name="BookingIDFK" ColumnName="BookingIDFK" />
                 <ScalarProperty Name="GuestIDFK" ColumnName="GuestIDFK" />
                 <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />

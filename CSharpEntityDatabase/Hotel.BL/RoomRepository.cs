@@ -9,7 +9,13 @@ namespace CSharpEntityDatabase.Hotel.BL
 {
    public class RoomRepository
     {
-       public void InsertRooms(string roomType)
+
+
+        /// <summary>
+        /// Used for inserting a new Room to the Database. 
+        /// </summary>
+        /// <param name="roomType"></param>
+        public void InsertRooms(string roomType)
        {
             using (var context = new HotelDBEntities())
             {
@@ -22,7 +28,10 @@ namespace CSharpEntityDatabase.Hotel.BL
         }
 
 
-
+        /// <summary>
+        /// Returns all the Rooms.
+        /// </summary>
+        /// <returns></returns>
        public IEnumerable GetRooms()
        {
            using (var context = new HotelDBEntities())
@@ -66,6 +75,11 @@ namespace CSharpEntityDatabase.Hotel.BL
             }
         }
 
+        /// <summary>
+        /// Used for adding 
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <param name="doubleBedCount"></param>
         public void AddDoubleBed(int roomId, int doubleBedCount)
 
         {
@@ -89,7 +103,10 @@ namespace CSharpEntityDatabase.Hotel.BL
 
 
 
-
+        /// <summary>
+        /// Deletes a Room(be careful!)
+        /// </summary>
+        /// <param name="roomId"></param>
         public void DeleteRoom(int roomId)
         {
 
@@ -112,7 +129,11 @@ namespace CSharpEntityDatabase.Hotel.BL
         }
 
 
-
+        /// <summary>
+        /// Edits a Rooms details.
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <param name="roomType"></param>
         public void EditRoom(int roomId, string roomType)
 
         {

@@ -10,16 +10,15 @@ namespace CSharpEntityDatabase.Hotel.BL
 {
     public class InvoiceRepository
     {
-
-
-
-
-
-
-        public void NewInvoice(int guestId, int bookingId)
+        /// <summary>
+        /// Creates a new Invoice 
+        /// </summary>
+        /// <param name="guestId"></param>
+        /// <param name="bookingId"></param>
+        public void NewInvoice(int guestId, int bookingId, int totalBill)
 
         {
-            // Is there an option for optional variaable?? For InvoicePaid
+            
             using (var context = new HotelDBEntities())
             {
 
@@ -29,12 +28,16 @@ namespace CSharpEntityDatabase.Hotel.BL
                 newInvoice.GuestIDFK = guestId;
                 newInvoice.DateCreated = DateTime.Now;
                 newInvoice.BookingIDFK = bookingId;
+                newInvoice.InvoiceTotal = totalBill;
                 context.Invoices.Add(newInvoice);
                 context.SaveChanges();
             }
         }
 
-
+        /// <summary>
+        /// Gets all the Invoices in the System
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable GetAllInvoices()
         {
             using (var context = new HotelDBEntities())
@@ -46,7 +49,8 @@ namespace CSharpEntityDatabase.Hotel.BL
                     {
                         i.InvoiceId,
                         i.GuestIDFK,
-                        i.BookingIDFK
+                        i.BookingIDFK,
+                        i.InvoiceTotal
 
                     };
 
@@ -82,8 +86,6 @@ namespace CSharpEntityDatabase.Hotel.BL
 
 
         }
-
-
 
 
     }

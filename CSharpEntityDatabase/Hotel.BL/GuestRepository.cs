@@ -14,8 +14,10 @@ namespace CSharpEntityDatabase.Hotel.BL
     public class GuestRepository
     {
 
-        // I couldn't delete guests by primary key.. tried including the following namespace "using System.Data.SqlClient;"
-
+        /// <summary>
+        /// Gets all the Guests in our Database.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable GetAllGuests()
         {
 
@@ -97,6 +99,11 @@ namespace CSharpEntityDatabase.Hotel.BL
 
         // Ok when you delete a guest you will want to be able to save their details.. maybe pass their details to a new table in the future? 
 
+
+        /// <summary>
+        /// Deletes a guest permanently from the Database
+        /// </summary>
+        /// <param name="guestId"></param>
         public void DeleteGuest(int guestId)
         {
 
@@ -115,16 +122,22 @@ namespace CSharpEntityDatabase.Hotel.BL
 
                     context.Guests.Attach(guestToDelete);
                     context.Guests.Remove(guestToDelete);
-                    context.SaveChanges();
-
-
-            
-                
-
+                    context.SaveChanges();   
             }
         }
 
 
+        /// <summary>
+        /// Updates a Guest's details
+        /// </summary>
+        /// <param name="guestId"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="address"></param>
+        /// <param name="suburb"></param>
+        /// <param name="provincestate"></param>
+        /// <param name="country"></param>
+        /// <param name="phonenumber"></param>
         public void UpdateGuest(int guestId, string firstName, string lastName, string address, string suburb, string provincestate,
             string country, string phonenumber)
 

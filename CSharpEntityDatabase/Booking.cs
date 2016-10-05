@@ -27,8 +27,11 @@ namespace CSharpEntityDatabase
         public Nullable<System.DateTime> CheckinTime { get; set; }
         public Nullable<System.DateTime> CheckoutTime { get; set; }
         public Nullable<int> MiniBar { get; set; }
-        public Nullable<int> RoomCharge { get; set; }
         public int GuestIDFK { get; set; }
+        public Nullable<int> RoomPrice { get; set; }
+        public int ResturantBill { get; set; }
+        public Nullable<bool> AddSingleBed { get; set; }
+        public Nullable<bool> AddBunkBed { get; set; }
     
         public virtual Room Room { get; set; }
         public virtual Guest Guest { get; set; }

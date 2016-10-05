@@ -21,25 +21,25 @@ namespace CSharpEntityDatabase
             dgvRooms.DataSource = roomRepository.GetRooms();
 
         }
-
+     
+        // Used for adding a new Room to the Database.
         private void btnNewRoom_Click(object sender, EventArgs e)
         {
             var roomRepository = new RoomRepository();
             MessageBox.Show(cbNewRoom.Text);
             roomRepository.InsertRooms(cbNewRoom.Text);
+            dgvRooms.DataSource = roomRepository.GetRooms();
         }
 
         private void btnGetRooms_Click(object sender, EventArgs e)
         {
+
+        }
+
      
-      
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        // Used for deleting a Room, be careful! 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var roomId = int.Parse(dgvRooms.SelectedRows[0].Cells[0].Value.ToString());
@@ -50,6 +50,7 @@ namespace CSharpEntityDatabase
 
         }
 
+        // Used for changing a Rooms "Type"
         private void btnChangeRoom_Click(object sender, EventArgs e)
         {
             var roomRepository = new RoomRepository();
