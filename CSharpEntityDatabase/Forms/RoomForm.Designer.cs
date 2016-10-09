@@ -39,6 +39,8 @@
             // 
             // dgvRooms
             // 
+            this.dgvRooms.AllowUserToResizeColumns = false;
+            this.dgvRooms.AllowUserToResizeRows = false;
             this.dgvRooms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRooms.Location = new System.Drawing.Point(24, 24);
@@ -47,6 +49,8 @@
             this.dgvRooms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRooms.Size = new System.Drawing.Size(323, 123);
             this.dgvRooms.TabIndex = 60;
+            this.dgvRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellClick);
+            this.dgvRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellContentClick);
             // 
             // btnGetRooms
             // 
@@ -105,6 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::CSharpEntityDatabase.Properties.Resources.bluebackground;
             this.ClientSize = new System.Drawing.Size(657, 319);
             this.Controls.Add(this.btnChangeRoom);
             this.Controls.Add(this.btnDelete);

@@ -19,13 +19,14 @@ namespace CSharpEntityDatabase
         public int ExtraSingleBed = 50;
         public int ExtraBunkBed = 80;
         private int RoomPriceTotal;
-        // Problems....
-        // DGV ROOMS Can select multiple rows at once, have to use cell click, 
+      
         public BookingForm()
         {
             InitializeComponent();
             var guestRepository = new GuestRepository();
             dgvGuests.DataSource = guestRepository.GetAllGuests();
+                dtBookingFrom.MinDate = DateTime.Today;
+            dtBookingTo.MinDate = DateTime.Today.AddDays(1);
             btnBooking.Enabled = false;
         }
 
@@ -48,6 +49,11 @@ namespace CSharpEntityDatabase
         private void button1_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+
+
+    
 
             // If the User wants a Single Bed added to their Room
             if (AddSingleBed == true)
@@ -57,54 +63,73 @@ namespace CSharpEntityDatabase
               
                 var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
                 var roomId = int.Parse(dgvRooms.SelectedRows[0].Cells[0].Value.ToString());
-                var bookingFrom = dtBookingFrom.Value;
-                var bookingTo = dtBookingTo.Value;
+                var bookingFrom = dtBookingFrom.Value.Date;
+                var bookingTo = dtBookingTo.Value.Date.Date;
                 var addedBedType = "Extra Single Bed";
 
 
                 bookingRepository.NewBooking(guestId, roomId, bookingFrom, bookingTo, addedBedType, RoomPriceTotal);
                 
-                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType);
+                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType + " total price is $" + RoomPriceTotal);
                 AddSingleBed = false;
                 this.Close();
+                return;
+
             }
 
             // If the User wants a Bunk Bed added to their Room
-            if (AddBunkBed == true)
+          if (AddBunkBed == true)
             {
                 var bookingRepository = new BookingRepository();
-                var invoiceRepository = new InvoiceRepository();
+               
                 var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
                 var roomId = int.Parse(dgvRooms.SelectedRows[0].Cells[0].Value.ToString());
-                var bookingFrom = dtBookingFrom.Value;
-                var bookingTo = dtBookingTo.Value;
+                var bookingFrom = dtBookingFrom.Value.Date.Date;
+                var bookingTo = dtBookingTo.Value.Date.Date;
                 var addedBedType = "Extra Bunk Bed";
-
-
-                bookingRepository.NewBooking(guestId, roomId, bookingFrom, bookingTo, addedBedType, RoomTypePrice);
-
-                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType);
-                AddBunkBed = false;
-                this.Close();
-            }
-
-            else
-            // else they haven't added an extra Bed
-            {
-                var bookingRepository = new BookingRepository();
-                var invoiceRepository = new InvoiceRepository();   
-                var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
-                var roomId = int.Parse(dgvRooms.SelectedRows[0].Cells[0].Value.ToString());
-                var bookingFrom = dtBookingFrom.Value;
-                var bookingTo = dtBookingTo.Value;
-                var addedBedType = "None";
 
 
                 bookingRepository.NewBooking(guestId, roomId, bookingFrom, bookingTo, addedBedType, RoomPriceTotal);
 
-                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo);
+                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " with a " + addedBedType + " total price is $" + RoomPriceTotal);
+                AddBunkBed = false;
+
+
                 this.Close();
+                return;
+
             }
+
+            else 
+            // else they haven't added an extra Bed
+            {
+
+
+                var bookingRepository = new BookingRepository();
+                var invoiceRepository = new InvoiceRepository();   
+                var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
+                var roomId = int.Parse(dgvRooms.SelectedRows[0].Cells[0].Value.ToString());
+                var bookingFrom = dtBookingFrom.Value.Date.Date;
+                var bookingTo = dtBookingTo.Value.Date.Date;
+                var addedBedType = "None";
+
+
+                bookingRepository.NewBooking(guestId, roomId, bookingFrom, bookingTo, addedBedType, RoomTypePrice);
+
+                MessageBox.Show("Booking has been made for room " + roomId + " for " + bookingFrom + " to " + bookingTo + " total price is $" + RoomTypePrice);
+                this.Close();
+                return;
+            }
+            }
+            catch (Exception)
+            {
+
+               
+            }
+
+
+            // have to leave this here otherwise other returns won't work
+            return;
         }
 
 
@@ -113,7 +138,7 @@ namespace CSharpEntityDatabase
         private void dtBookingFrom_ValueChanged(object sender, EventArgs e)
         {
             // If the DateTime we have selected is greater or equal to the bookingTo date
-            if (dtBookingFrom.Value >= dtBookingTo.Value)
+            if (dtBookingFrom.Value >= dtBookingTo.Value ||dtBookingFrom.Value < DateTime.Today)
             {
                 // Set the bookingTo date to 1 day greater then the bookingFrom date
                 dtBookingTo.Value = dtBookingFrom.Value.Date.AddDays(1);
@@ -136,7 +161,11 @@ namespace CSharpEntityDatabase
         {
             {
                 // If the bookingTo date is earlier then the bookingFrom date
-                if (dtBookingTo.Value <= dtBookingFrom.Value)
+            
+
+
+
+                if (dtBookingTo.Value <= dtBookingFrom.Value )
                 {
                     // Set the bookingFrom date to 1 day earlier then the bookingTo Date
                     dtBookingFrom.Value = dtBookingTo.Value.AddDays(-1);
@@ -174,7 +203,12 @@ namespace CSharpEntityDatabase
         /// <param name="e"></param>
         private void dgvRooms_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnBooking.Enabled = true;
 
+            try
+            {
+
+        
 
             cbExtraBeds.Items.Clear();
             
@@ -194,7 +228,13 @@ namespace CSharpEntityDatabase
 
                 case "Twin Room":
                     FillComboBoxShowRoomPrice(roomType);
-                    break;
+                    break;       
+            }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -207,14 +247,12 @@ namespace CSharpEntityDatabase
 
         private void btnGetInvoices_Click(object sender, EventArgs e)
         {
-            var invoicerepositrory = new InvoiceRepository();
-            dataGridView1.DataSource = invoicerepositrory.GetLastBooking();
+         
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var bookingRepository = new BookingRepository();
-            dataGridView1.DataSource = bookingRepository.GetAllBookings();
+          
         }
 
 
@@ -285,7 +323,7 @@ namespace CSharpEntityDatabase
 
         private void cbExtraBeds_MouseClick(object sender, MouseEventArgs e)
         {
-            btnBooking.Enabled = true;
+         
         }
 
         /// <summary>
@@ -295,6 +333,10 @@ namespace CSharpEntityDatabase
         /// <param name="e"></param>
         private void dgvGuests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+
+      
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvGuests.Rows[rowIndex];
             var guestId = row.Cells[0].Value.ToString();
@@ -305,8 +347,18 @@ namespace CSharpEntityDatabase
 
 
             MessageBox.Show("The current booking is for " + firstName + " " + lastName + " who lives at " + address +
-                            " and their phone number is " +
-                            phoneNumber);
+                            " and their phone number is " + phoneNumber);
+
+            }
+            catch (Exception)
+            {
+
+             
+            }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
     }
-}
+}}

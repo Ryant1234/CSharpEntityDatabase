@@ -16,6 +16,8 @@ namespace CSharpEntityDatabase.Forms
         public GuestForm()
         {
             InitializeComponent();
+            var guestRepository = new GuestRepository();
+            dgvGuests.DataSource = guestRepository.GetAllGuests();
         }
 
 
@@ -38,7 +40,7 @@ namespace CSharpEntityDatabase.Forms
             {
 
 
-                var guestId = int.Parse(lblGuestId.Text);
+                var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
 
 
                 var guestRepository = new GuestRepository();
@@ -54,15 +56,15 @@ namespace CSharpEntityDatabase.Forms
         }
 
 
-       // Used for updating a Guest's details. Parameter values are based upon whats in the textboxes on this Form.
+        // Used for updating a Guest's details. Parameter values are based upon whats in the textboxes on this Form.
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
 
                 var guestRepository = new GuestRepository();
-
-                guestRepository.UpdateGuest(int.Parse(lblGuestId.Text), txtFirstName.Text, txtLastName.Text,
+                var guestId = int.Parse(dgvGuests.SelectedRows[0].Cells[0].Value.ToString());
+                guestRepository.UpdateGuest(guestId, txtFirstName.Text, txtLastName.Text,
                     txtAddress.Text, txtSuburb.Text, txtProvinceState.Text, txtCountry.Text, txtPhoneNumber.Text);
 
 
@@ -76,29 +78,55 @@ namespace CSharpEntityDatabase.Forms
             }
         }
 
- 
+
         private void dgvGuests_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-        
-        }
-        
 
-       
+        }
+
+
+
         // When you click on a cell in the Guests DataGridView, that rows values are passed to the associated textboxes   
         private void dgvGuests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            DataGridViewRow row = dgvGuests.Rows[rowIndex];
 
-            lblGuestId.Text = row.Cells[0].Value.ToString();
-            txtFirstName.Text = row.Cells[1].Value.ToString();
-            txtLastName.Text = row.Cells[2].Value.ToString();
-            txtAddress.Text = row.Cells[3].Value.ToString();
-            txtSuburb.Text = row.Cells[4].Value.ToString();
-            txtProvinceState.Text = row.Cells[5].Value.ToString();
-            txtCountry.Text = row.Cells[6].Value.ToString();
-            txtPhoneNumber.Text = row.Cells[7].Value.ToString();
+            try
+            {
+
+
+
+                int rowIndex = e.RowIndex;
+                DataGridViewRow row = dgvGuests.Rows[rowIndex];
+
+            
+                txtFirstName.Text = row.Cells[1].Value.ToString();
+                txtLastName.Text = row.Cells[2].Value.ToString();
+                txtAddress.Text = row.Cells[3].Value.ToString();
+                txtSuburb.Text = row.Cells[4].Value.ToString();
+                txtProvinceState.Text = row.Cells[5].Value.ToString();
+                txtCountry.Text = row.Cells[6].Value.ToString();
+                txtPhoneNumber.Text = row.Cells[7].Value.ToString();
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void GuestForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+(e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
     }
-    }
 
+}

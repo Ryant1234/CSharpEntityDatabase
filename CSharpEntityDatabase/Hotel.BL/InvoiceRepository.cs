@@ -84,31 +84,110 @@ namespace CSharpEntityDatabase.Hotel.BL
 
 
 
-        public IEnumerable GetLastBooking()
+        public IEnumerable GetUnpaidInvoices()
         {
             using (var context = new HotelDBEntities())
             {
-
-                var getLastBooking = from b in context.Bookings
-
+                var unpaidInvoices = from i in context.Invoices
+                    where i.DatePaid == null
                     select new
+
                     {
-                        b.BookingID
+                        i.Guest.FirstName,
+                        i.Guest.LastName,
+                        i.InvoiceId,
+                        i.InvoiceTotal,
+
+
+
+
                     };
+                return unpaidInvoices.ToList();
 
-
-
-
-
-
-                return getLastBooking.ToList();
-            };
-           
-
+            }
 
         }
 
 
+
+
+
+
+        public IEnumerable GetPaidInvoices()
+        {
+            using (var context = new HotelDBEntities())
+            {
+                var unpaidInvoices = from i in context.Invoices
+                                     where i.DatePaid != null
+                                     select new
+
+                                     {
+                                         i.Guest.FirstName,
+                                         i.Guest.LastName,
+                                         i.InvoiceId,
+                                         i.InvoiceTotal,
+
+
+
+
+                                     };
+                return unpaidInvoices.ToList();
+
+            }
+
+        }
+
+
+
+        public IEnumerable OrderPaidInvoicesByDate()
+        {
+            using (var context = new HotelDBEntities())
+            {
+                var paidInvoices = from i in context.Invoices
+                    where i.DatePaid != null
+                    select new
+
+                    {
+                        i.Guest.FirstName,
+                        i.Guest.LastName,
+                        i.InvoiceId,
+                        i.InvoiceTotal,
+
+
+
+
+                    };
+                        
+
+                return paidInvoices.ToList();
+
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
-}
+
+        
+
+
+
+
+
+
+
+
+
+    }
+
 

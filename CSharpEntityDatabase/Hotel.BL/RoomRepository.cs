@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,16 +114,24 @@ namespace CSharpEntityDatabase.Hotel.BL
             using (var context = new HotelDBEntities())
             {
 
+                //var bookingToDelete = new Booking
+                //{RoomIDFK = roomId};
+                //context.Bookings.Attach(bookingToDelete);
+                //context.Bookings.Remove(bookingToDelete);
+                //context.SaveChanges();
+
+
                 var roomToDelete = new Room
                 { RoomID = roomId };
-
-
-
 
 
                 context.Rooms.Attach(roomToDelete);
                 context.Rooms.Remove(roomToDelete);
                 context.SaveChanges();
+
+
+
+
 
 
             }

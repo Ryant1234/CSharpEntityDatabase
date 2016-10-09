@@ -38,59 +38,73 @@
             this.btnCheckout = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtResturantBill = new System.Windows.Forms.TextBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtTotalBill = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGuests)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGuests
             // 
+            this.dgvGuests.AllowUserToResizeColumns = false;
+            this.dgvGuests.AllowUserToResizeRows = false;
             this.dgvGuests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGuests.Location = new System.Drawing.Point(12, 12);
+            this.dgvGuests.MultiSelect = false;
             this.dgvGuests.Name = "dgvGuests";
-            this.dgvGuests.Size = new System.Drawing.Size(373, 150);
+            this.dgvGuests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGuests.Size = new System.Drawing.Size(522, 150);
             this.dgvGuests.TabIndex = 0;
+            this.dgvGuests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGuests_CellClick);
+            this.dgvGuests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGuests_CellContentClick);
             // 
             // checkboxHasPaid
             // 
             this.checkboxHasPaid.AutoSize = true;
-            this.checkboxHasPaid.Location = new System.Drawing.Point(557, 131);
+            this.checkboxHasPaid.BackColor = System.Drawing.Color.Transparent;
+            this.checkboxHasPaid.Location = new System.Drawing.Point(728, 96);
             this.checkboxHasPaid.Name = "checkboxHasPaid";
             this.checkboxHasPaid.Size = new System.Drawing.Size(94, 17);
             this.checkboxHasPaid.TabIndex = 1;
             this.checkboxHasPaid.Text = "Customer Paid";
-            this.checkboxHasPaid.UseVisualStyleBackColor = true;
+            this.checkboxHasPaid.UseVisualStyleBackColor = false;
             this.checkboxHasPaid.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(557, 154);
+            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox2.Location = new System.Drawing.Point(728, 119);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(103, 17);
             this.checkBox2.TabIndex = 2;
             this.checkBox2.Text = "Room Checked ";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.UseVisualStyleBackColor = false;
             // 
             // txtMiniBarCharge
             // 
-            this.txtMiniBarCharge.Location = new System.Drawing.Point(557, 238);
+            this.txtMiniBarCharge.Location = new System.Drawing.Point(728, 203);
             this.txtMiniBarCharge.Name = "txtMiniBarCharge";
             this.txtMiniBarCharge.Size = new System.Drawing.Size(100, 20);
             this.txtMiniBarCharge.TabIndex = 3;
+            this.txtMiniBarCharge.Text = "0";
+            this.txtMiniBarCharge.TextChanged += new System.EventHandler(this.txtMiniBarCharge_TextChanged);
             this.txtMiniBarCharge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMiniBarCharge_KeyPress);
             // 
             // txtRoomCharge
             // 
-            this.txtRoomCharge.Location = new System.Drawing.Point(557, 277);
+            this.txtRoomCharge.Location = new System.Drawing.Point(728, 242);
             this.txtRoomCharge.Name = "txtRoomCharge";
+            this.txtRoomCharge.ReadOnly = true;
             this.txtRoomCharge.Size = new System.Drawing.Size(100, 20);
             this.txtRoomCharge.TabIndex = 4;
+            this.txtRoomCharge.TextChanged += new System.EventHandler(this.txtRoomCharge_TextChanged);
             this.txtRoomCharge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRoomCharge_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(554, 261);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(725, 226);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 5;
@@ -99,7 +113,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(554, 222);
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Location = new System.Drawing.Point(725, 187);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 6;
@@ -107,7 +122,7 @@
             // 
             // btnCheckout
             // 
-            this.btnCheckout.Location = new System.Drawing.Point(573, 317);
+            this.btnCheckout.Location = new System.Drawing.Point(728, 317);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(108, 41);
             this.btnCheckout.TabIndex = 66;
@@ -118,7 +133,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(554, 183);
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Location = new System.Drawing.Point(725, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 68;
@@ -126,25 +142,40 @@
             // 
             // txtResturantBill
             // 
-            this.txtResturantBill.Location = new System.Drawing.Point(557, 199);
+            this.txtResturantBill.Location = new System.Drawing.Point(728, 164);
             this.txtResturantBill.Name = "txtResturantBill";
             this.txtResturantBill.Size = new System.Drawing.Size(100, 20);
             this.txtResturantBill.TabIndex = 67;
+            this.txtResturantBill.Text = "0";
+            this.txtResturantBill.TextChanged += new System.EventHandler(this.txtResturantBill_TextChanged);
             this.txtResturantBill.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResturantBill_KeyPress);
             // 
-            // maskedTextBox1
+            // label4
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(349, 222);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox1.TabIndex = 69;
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Location = new System.Drawing.Point(725, 266);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 70;
+            this.label4.Text = "Total Bill";
+            // 
+            // txtTotalBill
+            // 
+            this.txtTotalBill.Location = new System.Drawing.Point(728, 282);
+            this.txtTotalBill.Name = "txtTotalBill";
+            this.txtTotalBill.ReadOnly = true;
+            this.txtTotalBill.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalBill.TabIndex = 69;
             // 
             // CheckoutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 370);
-            this.Controls.Add(this.maskedTextBox1);
+            this.BackgroundImage = global::CSharpEntityDatabase.Properties.Resources.bluebackground;
+            this.ClientSize = new System.Drawing.Size(871, 370);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtTotalBill);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtResturantBill);
             this.Controls.Add(this.btnCheckout);
@@ -176,6 +207,7 @@
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtResturantBill;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtTotalBill;
     }
 }

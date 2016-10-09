@@ -47,6 +47,7 @@ namespace CSharpEntityDatabase
             var roomRepository = new RoomRepository();
             roomRepository.DeleteRoom(roomId);
             dgvRooms.DataSource = roomRepository.GetRooms();
+            btnDelete.Enabled = false;
 
         }
 
@@ -64,10 +65,17 @@ namespace CSharpEntityDatabase
         {
 
 
-            switch (cbNewRoom.Text)
-            {
-                    
-            }
+      
+        }
+
+        private void dgvRooms_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvRooms_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDelete.Enabled = true;
         }
     }
 }

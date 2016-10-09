@@ -24,7 +24,6 @@ namespace CSharpEntityDatabase.Hotel.BL
             using (var context = new HotelDBEntities())
             {
                 var alldata = from g in context.Guests
-                    //where g.GuestID.Equals(1)
                     select new
 
                     {
@@ -117,10 +116,10 @@ namespace CSharpEntityDatabase.Hotel.BL
                 { GuestID = guestId};
 
 
-                
 
 
-                    context.Guests.Attach(guestToDelete);
+
+                context.Guests.Attach(guestToDelete);
                     context.Guests.Remove(guestToDelete);
                     context.SaveChanges();   
             }
@@ -144,20 +143,16 @@ namespace CSharpEntityDatabase.Hotel.BL
         {
             using (var context = new HotelDBEntities())
             {
-                var query = from g in context.Guests
-                    where g.GuestID == guestId
-                    select g;
+                var selectedGuest = context.Guests.FirstOrDefault(g => g.GuestID == guestId);
 
-                var guest = query.First();
-                   
 
-                guest.FirstName = firstName;
-                guest.LastName = lastName;
-                guest.Address = address;
-                guest.Suburb = suburb;
-                guest.Province_State = provincestate;
-                guest.Country = country;
-                guest.PhoneNumber = phonenumber;
+                selectedGuest.FirstName = firstName;
+                selectedGuest.LastName = lastName;
+                selectedGuest.Address = address;
+                selectedGuest.Suburb = suburb;
+                selectedGuest.Province_State = provincestate;
+                selectedGuest.Country = country;
+                selectedGuest.PhoneNumber = phonenumber;
 
                 context.SaveChanges();
             }

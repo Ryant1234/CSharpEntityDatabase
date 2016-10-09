@@ -24,11 +24,11 @@ namespace CSharpEntityDatabase.Hotel.BL
                     {
                         b.BookingID,
                         b.Guest.FirstName,
+                        b.RoomIDFK,
                         b.BookingFrom,
                         b.BookingTo,
-
-                        b.GuestIDFK,
-                        b.RoomIDFK
+                        b.GuestIDFK
+                       
 
 
 
@@ -132,17 +132,13 @@ namespace CSharpEntityDatabase.Hotel.BL
             {
 
 
-                var query = from b in context.Bookings
-                    where b.BookingID == bookingId
-                    select b;
-
-                var booking = query.First();
+                var booking = context.Bookings.FirstOrDefault(b => b.BookingID == bookingId);
 
                 booking.MiniBar = miniBarCharge;
                 booking.ResturantBill = resturantBill;
                 booking.CheckoutTime = DateTime.Now;
 
-                context.Bookings.Add(booking);
+           
 
                 context.SaveChanges();
             }
@@ -159,15 +155,13 @@ namespace CSharpEntityDatabase.Hotel.BL
             {
 
 
-                var query = from b in context.Bookings
-                    where b.BookingID == bookingId
-                    select b;
+                var booking = context.Bookings.FirstOrDefault(b => b.BookingID == bookingId);
 
-                var booking = query.First();
+
 
                 booking.CheckinTime = DateTime.Now;
 
-                context.Bookings.Add(booking);
+            
 
                 context.SaveChanges();
             }
@@ -224,16 +218,51 @@ namespace CSharpEntityDatabase.Hotel.BL
             using (var context = new HotelDBEntities())
             {
                 var alldata = from b in context.Bookings
-                                  where b.CheckoutTime == null
+                    where b.CheckoutTime == null && b.CheckinTime != null 
+                
                               select new
 
                               {
                                   b.BookingID,
+                                  b.GuestIDFK,
                                   b.Guest.FirstName,
                                   b.BookingFrom,
                                   b.BookingTo,
-                               
+                               b.RoomPrice,
+                              //    b.GuestIDFK,
+                                  b.RoomIDFK
+
+
+
+                              };
+
+
+                return alldata.ToList();
+
+
+            }
+
+        }
+
+
+        public IEnumerable GetBookingsWithNoCheckInDate()
+        {
+            using (var context = new HotelDBEntities())
+            {
+                var alldata = from b in context.Bookings
+                              where b.CheckinTime == null 
+                              select new
+
+                              {
+                                  b.BookingID,
                                   b.GuestIDFK,
+                                  b.Guest.FirstName,
+                                  b.Guest.LastName,                           
+                                  b.BookingFrom,
+                                  b.BookingTo,
+                                  b.CheckinTime,
+                                  b.RoomPrice,
+                                  //    b.GuestIDFK,
                                   b.RoomIDFK
 
 
@@ -250,10 +279,37 @@ namespace CSharpEntityDatabase.Hotel.BL
 
 
 
+
+
+        public void DeleteBooking(int bookingId)
+        {
+
+
+
+
+            using (var context = new HotelDBEntities())
+            {
+
+                var bookingToDelete = new Booking
+                { BookingID = bookingId };
+
+
+
+
+
+                context.Bookings.Attach(bookingToDelete);
+                context.Bookings.Remove(bookingToDelete);
+                context.SaveChanges();
+            }
+        }
+
+
+
+
     }
 
 
-    
+
 }
 
 

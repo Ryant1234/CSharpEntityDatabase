@@ -47,8 +47,7 @@ namespace CSharpEntityDatabase
 
         private void InvoiceTab_Click(object sender, EventArgs e)
         {
-            var invoicerepositrory = new InvoiceRepository();
-           dgvInvoices.DataSource = invoicerepositrory.GetAllInvoices();
+          
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -63,6 +62,30 @@ namespace CSharpEntityDatabase
             checkOutForm.Show();
 
 
+        }
+
+        private void btnQueries_Click(object sender, EventArgs e)
+        {
+            var queriesForm = new QueriesForm();
+            queriesForm.Show();
+        }
+
+        private void btnGuests_Click(object sender, EventArgs e)
+        {
+            var guestForm = new GuestForm();
+            guestForm.Show();
+        }
+
+        private void btnCheckInGuest_Click(object sender, EventArgs e)
+        {
+            var checkinForm = new CheckInForm();
+            checkinForm.Show();
+        }
+
+        private void btnDeleteBooking_Click(object sender, EventArgs e)
+        {
+            var deleteBookingForm = new DeleteBookingForm();
+            deleteBookingForm.Show();
         }
     }
         }
