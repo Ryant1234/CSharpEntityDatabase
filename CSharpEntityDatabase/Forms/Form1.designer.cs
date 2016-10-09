@@ -85,7 +85,7 @@
             this.btnGuests.Name = "btnGuests";
             this.btnGuests.Size = new System.Drawing.Size(120, 41);
             this.btnGuests.TabIndex = 65;
-            this.btnGuests.Text = "New/Update/Delte Guest";
+            this.btnGuests.Text = "New/Update/Delete Guest";
             this.btnGuests.UseVisualStyleBackColor = false;
             this.btnGuests.Click += new System.EventHandler(this.btnGuests_Click);
             // 
